@@ -5,7 +5,8 @@ VERSION=0.1.5
 BINARY_NAME=chatgpt-wecom
 LDFLAGS=-ldflags '-linkmode external -extldflags "-static"' -trimpath
 
-all: mac-amd64 mac-arm64 linux-amd64 linux-arm64 win64
+all: 
+	gox -output "${BINARY_NAME}.{{.Arch}}-{{.OS}}" -osarch="linux/amd64 linux/arm64 darwin/arm64 darwin/amd64" -ldflags "-s -w" ./cmd/main 
 
 dockerenv:
 	 docker build -t ${BINARY_NAME}:${VERSION} -f $(shell pwd)/docker/callback.Dockerfile .
@@ -28,3 +29,4 @@ win64:
 clean:
 	$(GOCLEAN)
 	rm -f $(BINARY_NAME).$(VERSION).amd64-linux $(BINARY_NAME).$(VERSION).amd64-darwin $(BINARY_NAME).$(VERSION).arm64-darwin $(BINARY_NAME).$(VERSION).arm64-linux $(BINARY_NAME).$(VERSION).exe
+

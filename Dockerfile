@@ -7,6 +7,6 @@ COPY --from=certs /etc/ssl/certs /etc/ssl/certs
 ARG TARGETOS
 ARG TARGETARCH
 
-COPY chatgpt-webcom.*.${TARGETARCH}-${TARGETOS} /bin/chatgpt-webcom
+COPY chatgpt-webcom.${TARGETARCH}-${TARGETOS} /bin/chatgpt-webcom
 
 CMD ["/bin/chatgpt-wecom", "-conf=/conf/chatgpt.conf"]
