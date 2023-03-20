@@ -6,7 +6,7 @@ BINARY_NAME=chatgpt-wecom
 LDFLAGS=-ldflags '-linkmode external -extldflags "-static"' -trimpath
 
 all: 
-	gox -output "${BINARY_NAME}.{{.Arch}}-{{.OS}}" -osarch="linux/amd64 linux/arm64 darwin/arm64 darwin/amd64" -ldflags "-s -w" ./cmd/main 
+	gox -output "${BINARY_NAME}.{{.Arch}}-{{.OS}}" -osarch="linux/amd64 linux/arm64 darwin/arm64 darwin/amd64" -ldflags "-s -w" ./cmd/app 
 
 dockerenv:
 	 docker build -t ${BINARY_NAME}:${VERSION} -f $(shell pwd)/docker/callback.Dockerfile .
