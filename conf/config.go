@@ -33,7 +33,8 @@ type Logger struct {
 }
 
 type GPT struct {
-	ApiKey string `mapstructure:"api_key"`
+	ApiKey    string `mapstructure:"api_key"`
+	HttpProxy string `mapstructure:"http_proxy"`
 }
 
 type WeCom struct {
