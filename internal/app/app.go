@@ -1,6 +1,8 @@
 package app
 
 import (
+	"net/http"
+	"net/url"
 	"os"
 	"os/signal"
 	"syscall"
@@ -22,7 +24,20 @@ func Run(cfg *config.Config) {
 	log.Info().Msgf("Config: %v", cfg)
 
 	// 初始化 gpt client
-	gptClient := openai.NewClient(cfg.GPT.ApiKey)
+	config := openai.DefaultConfig(cfg.GPT.ApiKey)
+	if cfg.GPT.HttpProxy != "" {
+		proxyUrl, err := url.Parse(cfg.GPT.HttpProxy)
+		if err != nil {
+			panic(err)
+		}
+		transport := &http.Transport{
+			Proxy: http.ProxyURL(proxyUrl),
+		}
+		config.HTTPClient = &http.Client{
+			Transport: transport,
+		}
+	}
+	gptClient := openai.NewClientWithConfig(config)
 
 	// 初始化数据库 client
 	dbConf := cfg.Database
