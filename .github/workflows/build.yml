@@ -5,7 +5,9 @@ on:
   push:
     branches:
     - master
-
+  tags:        
+      - '**'
+      
 jobs:
   build:
     name: Build
