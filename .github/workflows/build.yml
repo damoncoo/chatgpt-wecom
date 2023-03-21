@@ -34,7 +34,7 @@ jobs:
           tag: ${{ github.ref }}
           file_glob: true
           overwrite: true
-          release_name: Auto Release            
+          body: "Auto Release"
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
