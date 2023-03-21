@@ -25,17 +25,6 @@ jobs:
           make all
           ls
 
-      - name: Upload Release Assets
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_name: damoncoo/chatgpt-wecom
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./chatgpt-wecom.*
-          tag: ${{ github.ref }}
-          file_glob: true
-          overwrite: true
-          body: "Auto Release"
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
@@ -54,3 +43,9 @@ jobs:
           push: true
           tags: |
             ghcr.io/damoncoo/chatgpt-wecom:latest
+            
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: chatgpt-wecom.*
