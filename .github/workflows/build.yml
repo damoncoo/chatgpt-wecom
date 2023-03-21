@@ -4,8 +4,8 @@ name: Build
 on:
   push:
     branches:
-    - master
-  tags:        
+      - master
+    tags:        
       - '**'
       
 jobs:
