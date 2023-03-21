@@ -29,8 +29,8 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./chatgpt-wecom_*
-          tag: 0.15
+          file: ./chatgpt-wecom.*
+          tag: ${{ github.ref }}
           file_glob: true
           overwrite: true
           release_name: Auto Release            
