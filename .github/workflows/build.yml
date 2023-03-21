@@ -28,6 +28,7 @@ jobs:
       - name: Upload Release Assets
         uses: svenstaro/upload-release-action@v2
         with:
+          repo_name: damoncoo/chatgpt-wecom
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ./chatgpt-wecom.*
           tag: ${{ github.ref }}
